@@ -7,10 +7,10 @@
     <string name="sort_order_label">Sort Order</string>
     <string name="sort_order_mostpopular">Most Popular</string>
     <string name="sort_order_toprated">Top Rated</string>
-    <string name="sort_order_value_mostpopular">popular</string>
-    <string name="sort_order_value_toprated">top_rated</string>
-    <string name="api_base_url">http://api.themoviedb.org/3/movie/</string>
-    <string name="api_key"></string>
+    <string name="sort_order_value_mostpopular" translatable="false">popular</string>
+    <string name="sort_order_value_toprated" translatable="false">top_rated</string>
+    <string name="api_base_url" translatable="false">http://api.themoviedb.org/3/movie/</string>
+    <string name="api_key" translatable="false"></string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
 

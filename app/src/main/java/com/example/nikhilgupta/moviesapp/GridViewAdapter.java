@@ -48,7 +48,7 @@ public class GridViewAdapter extends ArrayAdapter {
         ImageView imageView;
         if (row == null) {
             imageView = new ImageView(context);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+           // imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         } else {
             imageView = (ImageView) row;
         }

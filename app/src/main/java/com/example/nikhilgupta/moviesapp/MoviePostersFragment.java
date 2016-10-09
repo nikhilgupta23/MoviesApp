@@ -63,7 +63,7 @@ public class MoviePostersFragment extends Fragment {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String pref = sharedPref.getString(getString(R.string.sort_order_key), getString(R.string.sort_order_value_mostpopular));
 
-        if(isOnline() == false) {
+        if(!isOnline()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
             builder.setMessage(R.string.internet_error_dialog_message)
@@ -81,11 +81,11 @@ public class MoviePostersFragment extends Fragment {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
-
+        View view = inflater.inflate(R.layout.movie_posters_fragment, container, false);
         new FetchMoviesTask().execute(pref, getString(R.string.api_base_url), getString(R.string.api_key));
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.movie_posters_fragment, container, false);
+        return view;
     }
 
     class FetchMoviesTask extends AsyncTask<String, Void, Movie[]> {
