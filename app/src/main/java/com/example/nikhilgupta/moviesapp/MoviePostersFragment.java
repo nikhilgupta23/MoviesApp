@@ -113,6 +113,28 @@ public class MoviePostersFragment extends Fragment implements LoaderManager.Load
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
+    void showErrorDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setMessage(R.string.internet_error_dialog_message)
+                .setTitle(R.string.internet_error_dialog_title);
+        builder.setPositiveButton(R.string.internet_error_dialog_refresh, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if (isOnline())
+                    getActivity().recreate();
+                else
+                    showErrorDialog();
+            }
+        });
+        builder.setNegativeButton(R.string.internet_error_dialog_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -120,23 +142,9 @@ public class MoviePostersFragment extends Fragment implements LoaderManager.Load
         String pref = sharedPref.getString(getString(R.string.sort_order_key), getString(R.string.sort_order_value_mostpopular));
 
         if (!isOnline()) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-            builder.setMessage(R.string.internet_error_dialog_message)
-                    .setTitle(R.string.internet_error_dialog_title);
-            builder.setPositiveButton(R.string.internet_error_dialog_refresh, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    getActivity().recreate();
-                }
-            });
-            builder.setNegativeButton(R.string.internet_error_dialog_cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    // User cancelled the dialog
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            showErrorDialog();
         }
+        
         View view = inflater.inflate(R.layout.movie_posters_fragment, container, false);
 
         if (!pref.equals(getString(R.string.sort_order_value_favorites))) {
