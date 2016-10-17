@@ -19,6 +19,10 @@
         </activity>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".MovieDetailsActivity"></activity>
+
+        <provider
+            android:authorities="com.example.nikhilgupta.moviesapp"
+            android:name=".FavoritesProvider" />
     </application>
 
 </manifest>

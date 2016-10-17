@@ -18,6 +18,7 @@ package com.example.nikhilgupta.moviesapp;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Manages a local database for weather data.
@@ -25,7 +26,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class FavoritesDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 7;
 
     static final String DATABASE_NAME = "favorites.db";
 
@@ -38,10 +39,10 @@ public class FavoritesDbHelper extends SQLiteOpenHelper {
         // Create a table to hold favorites.
         final String SQL_CREATE_FAVORITES_TABLE = "CREATE TABLE " + FavoritesContract.FavoritesEntry.TABLE_NAME + " (" +
                 FavoritesContract.FavoritesEntry._ID + " INTEGER PRIMARY KEY," +
-                FavoritesContract.FavoritesEntry.COLUMN_MOVIE_ID + " TEXT UNIQUE NOT NULL, " +
-                FavoritesContract.FavoritesEntry.COLUMN_ADDED_ON + "DATETIME DEFAULT CURRENT_TIMESTAMP " +
+                FavoritesContract.FavoritesEntry.COLUMN_MOVIE_ID + " INTEGER UNIQUE NOT NULL, " +
+                FavoritesContract.FavoritesEntry.COLUMN_ADDED_ON + " DATETIME DEFAULT CURRENT_TIMESTAMP " +
                 " );";
-
+        Log.e("HOOOOOOOOOOOOOOOOOOOOOO", SQL_CREATE_FAVORITES_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_FAVORITES_TABLE);
     }
 

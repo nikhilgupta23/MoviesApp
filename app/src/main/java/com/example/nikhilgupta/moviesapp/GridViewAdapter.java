@@ -1,10 +1,12 @@
 package com.example.nikhilgupta.moviesapp;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -13,11 +15,11 @@ import java.util.ArrayList;
 /**
  * Created by Nikhil Gupta on 23-09-2016.
  */
-public class GridViewAdapter extends ArrayAdapter {
+public class GridViewAdapter extends ArrayAdapter<Movie> {
     private Context context;
-    private ArrayList<String> data = new ArrayList<>();
+    private ArrayList<Movie> data = new ArrayList<>();
 
-    public GridViewAdapter(Context context, int layoutResourceId, ArrayList data) {
+    public GridViewAdapter(Context context, int layoutResourceId, ArrayList<Movie> data) {
         super(context, layoutResourceId, data);
         this.context = context;
         this.data = data;
@@ -45,15 +47,19 @@ public class GridViewAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        ImageView imageView;
+
         if (row == null) {
-            imageView = new ImageView(context);
-           // imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        } else {
-            imageView = (ImageView) row;
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            row = inflater.inflate(R.layout.grid_item_layout, null);
         }
-        Picasso.with(context).load("http://image.tmdb.org/t/p"+computeWidth(imageView.getMaxWidth())+data.get(position)).into(imageView);
-        return imageView;
+
+        ImageView imageView = (ImageView) row.findViewById(R.id.image);
+        TextView movieTitle = (TextView) row.findViewById(R.id.poster_title);
+        Picasso.with(context)
+                .load("http://image.tmdb.org/t/p" + computeWidth(imageView.getMaxWidth()) + data.get(position).poster_path)
+                .into(imageView);
+        movieTitle.setText(data.get(position).title);
+        return row;
     }
 
 }

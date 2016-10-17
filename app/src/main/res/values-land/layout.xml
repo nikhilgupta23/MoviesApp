@@ -1,0 +1,5 @@
+<resources>
+    <item name="activity_main" type="layout">
+        @layout/main_twopane
+    </item>
+</resources>

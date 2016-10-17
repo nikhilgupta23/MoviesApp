@@ -7,8 +7,10 @@
     <string name="sort_order_label">Sort Order</string>
     <string name="sort_order_mostpopular">Most Popular</string>
     <string name="sort_order_toprated">Top Rated</string>
+    <string name="sort_order_favorites">Favorites</string>
     <string name="sort_order_value_mostpopular" translatable="false">popular</string>
     <string name="sort_order_value_toprated" translatable="false">top_rated</string>
+    <string name="sort_order_value_favorites" translatable="false">favorites</string>
     <string name="api_base_url" translatable="false">http://api.themoviedb.org/3/movie/</string>
     <string name="api_key" translatable="false"></string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
@@ -16,6 +18,8 @@
 
     <string name="release">Release: </string>
     <string name="rating">Rating: </string>
+    <string name="videos">Videos: </string>
+    <string name="reviews">Reviews: </string>
 
     <string name="loading_message">Loading. Please wait...</string>
     <string name="select_movie_message">Please select a movie to display</string>
@@ -25,4 +29,8 @@
     <string name="internet_error_dialog_refresh">Retry</string>
     <string name="internet_error_dialog_cancel">Cancel</string>
     <string name="internet_error_toast_message">Internet connection is unavailable. Therefore, the information displayed here may be incomplete or outdated. Please connect to the internet and refresh.</string>
+
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="added_on">Added on</string>
+    <string name="at">at</string>
 </resources>

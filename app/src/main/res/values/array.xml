@@ -4,9 +4,11 @@
     <string-array name="sort_order_array">
         <item>@string/sort_order_mostpopular</item>
         <item>@string/sort_order_toprated</item>
+        <item>@string/sort_order_favorites</item>
     </string-array>
     <string-array name="sort_order_values_array">
         <item>@string/sort_order_value_mostpopular</item>
         <item>@string/sort_order_value_toprated</item>
+        <item>@string/sort_order_value_favorites</item>
     </string-array>
 </resources>

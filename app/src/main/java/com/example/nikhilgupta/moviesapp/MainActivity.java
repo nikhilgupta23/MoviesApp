@@ -2,17 +2,17 @@ package com.example.nikhilgupta.moviesapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.GridView;
 
 public class MainActivity extends AppCompatActivity implements MoviePostersFragment.OnMovieSelectedListener {
 
     String storedPref;
+    boolean mTwoPane;
+    final String MOVIE_DETAIL_FRAGMENT_TAG = "MDFTAG";
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,11 +35,7 @@ public class MainActivity extends AppCompatActivity implements MoviePostersFragm
 
         if(!storedPref.equals(pref)) {
             recreate();
-            if (getResources().getConfiguration().orientation
-                    == Configuration.ORIENTATION_LANDSCAPE) {
-                ((GridView) (findViewById(R.id.gridView))).setNumColumns(1);
             }
-        }
     }
 
     @Override
@@ -59,25 +55,31 @@ public class MainActivity extends AppCompatActivity implements MoviePostersFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE) {
-            ((GridView)(findViewById(R.id.gridView))).setNumColumns(1);
+
+        if (findViewById(R.id.details_container) != null) {
+            mTwoPane = true;
+        } else {
+            mTwoPane = false;
         }
     }
 
     MovieDetailsFragment details;
     @Override
     public void onMovieSelected(Movie[] movies, int i) {
-        details = (MovieDetailsFragment) getFragmentManager().findFragmentById(R.id.details);
-        // Check for landscape mode
-        if (details!= null && details.isVisible())
-        {
-            details.setNewPage(movies[i]);
-        }
-        else
-        {
+
+        if (mTwoPane) {
+            Bundle args = new Bundle();
+            args.putParcelable(MovieDetailsFragment.MOVIE_ITEM, movies[i]);
+
+            MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment();
+            movieDetailsFragment.setArguments(args);
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.details_container, movieDetailsFragment, MOVIE_DETAIL_FRAGMENT_TAG)
+                    .commit();
+        } else {
             Intent intent = new Intent(this , MovieDetailsActivity.class);
-            intent.putExtra("movie", movies[i]);
+            intent.putExtra(MovieDetailsFragment.MOVIE_ITEM, movies[i]);
             startActivity(intent);
         }
     }

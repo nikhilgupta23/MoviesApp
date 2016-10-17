@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        class="com.example.nikhilgupta.moviesapp.MoviePostersFragment"
+        android:id="@+id/titles"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:layout_width="0dp" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:id="@+id/details_container" />
+</LinearLayout>
+
+
+

@@ -13,14 +13,16 @@ public class Movie implements Parcelable{
     String title;
     String poster_path;
     double vote_average;
+    int movie_id;
 
-    Movie(String title, String overview, String poster_path, String release_Date, double vote_average)
+    Movie(String title, String overview, String poster_path, String release_Date, double vote_average, int movie_id)
     {
         this.overview = overview;
         this.title = title;
         this.release_Date = release_Date;
         this.poster_path = poster_path;
         this.vote_average = vote_average;
+        this.movie_id = movie_id;
     }
 
     protected Movie(Parcel in) {
@@ -29,6 +31,7 @@ public class Movie implements Parcelable{
         title = in.readString();
         poster_path = in.readString();
         vote_average = in.readDouble();
+        movie_id = in.readInt();
     }
 
     @Override
@@ -38,6 +41,7 @@ public class Movie implements Parcelable{
         dest.writeString(title);
         dest.writeString(poster_path);
         dest.writeDouble(vote_average);
+        dest.writeInt(movie_id);
     }
 
     @Override

@@ -55,8 +55,8 @@ public class FavoritesContract {
         public static final String COLUMN_MOVIE_ID = "movie_id";
         public static final String COLUMN_ADDED_ON = "added_on";
 
-        public static Uri buildFavoritesUri(long id) {
-            return ContentUris.withAppendedId(CONTENT_URI, id);
+        public static Uri buildFavoritesUri(int movie_id) {
+            return ContentUris.withAppendedId(CONTENT_URI, movie_id);
         }
 
         public static String getMovieIdFromUri(Uri uri) {

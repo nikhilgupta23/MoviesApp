@@ -1,28 +1,28 @@
 package com.example.nikhilgupta.moviesapp;
 
-import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
-public class MovieDetailsActivity extends Activity {
+public class MovieDetailsActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
-        if (getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE) {
-            // If the screen is now in landscape mode, we can show the
-            // dialog in-line with the list so we don't need this activity.
-            finish();
-            return;
-        }
 
         if (savedInstanceState == null) {
             // During initial setup, plug in the details fragment.
-            Movie movie = getIntent().getParcelableExtra("movie");
-            MovieDetailsFragment movieDetailsFragment = (MovieDetailsFragment)(getFragmentManager().findFragmentById(R.id.details));
-            movieDetailsFragment.setNewPage(movie);
+            Movie movie = getIntent().getParcelableExtra(MovieDetailsFragment.MOVIE_ITEM);
+
+            Bundle args = new Bundle();
+            args.putParcelable(MovieDetailsFragment.MOVIE_ITEM, movie);
+
+            MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment();
+            movieDetailsFragment.setArguments(args);
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.details_container, movieDetailsFragment)
+                    .commit();
         }
     }
 
